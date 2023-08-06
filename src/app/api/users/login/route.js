@@ -9,7 +9,7 @@ connect();
 export async function POST(request) {
   try { 
      const reqBody = await request.json()
-        const {email, password,name} = reqBody;
+        const {email, password} = reqBody;
     const user = await User.findOne({ email })
     if (!user) {
       return NextResponse.json({ error: "user doesn,t exist" }, { status: 400 });
@@ -19,8 +19,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "wrong password" }, { status: 400 });
     }
     const tokenData = {
-      id: user._id,
-      username:user.username
+      id: user._id
     }
     const token = await jwt.sign(tokenData, 'pussy', { expiresIn: "1d" });
     const response = NextResponse.json({

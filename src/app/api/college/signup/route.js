@@ -1,17 +1,21 @@
 import { connect } from "@/dbConfig/dbConfig";
 import College from "@/models/College.js";
+import allowedCollege from "@/models/allowedcollege";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from 'bcryptjs'
-
- 
-
 
 
 connect();
 export async function POST(request) {
   try { 
     const reqBody = await request.json()
-    const { name, email, password} = reqBody;
+    const { name, email, password } = reqBody;
+    const domain = email.split('@');
+    const saveddomain = domain[domain.length - 1];
+    const newDomain = new allowedCollege({
+      domain: saveddomain
+    });
+    await newDomain.save();
      console.log(reqBody);
     const college = await College.findOne({ email });
     if (college) {

@@ -19,8 +19,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "wrong password" }, { status: 400 });
     }
     const tokenData = {
-      id: college._id,
-      username:college.email
+      id: college._id
     }
     const token = await jwt.sign(tokenData, 'pussy', { expiresIn: "1d" });
     const response = NextResponse.json({

@@ -11,8 +11,9 @@ const userSchema = new mongoose.Schema({
     image: { type: String },
     gender: {
         type: String, enum: ['male', 'female', 'other']},
-    DOB: { type: Date, },
+    DOB: { type: String },
     year: { type: Number },
+    bio:{type: String}
    
     
     
