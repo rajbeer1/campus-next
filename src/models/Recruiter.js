@@ -4,11 +4,6 @@ const recruiterSchema = new mongoose.Schema({
   companyName: {
     type: String
   },
-  uid: {
-    type: String,
-    unique: true,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -25,6 +20,6 @@ const recruiterSchema = new mongoose.Schema({
   // Other fields...
 });
 
-const Recruiter = mongoose.model('Recruiter', recruiterSchema);
+const Recruiter = mongoose.models.Recruiter ||mongoose.model('Recruiter', recruiterSchema);
 
 module.exports = Recruiter;
